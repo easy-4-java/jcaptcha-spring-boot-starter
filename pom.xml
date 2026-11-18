@@ -472,7 +472,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jcaptcha.version>2.0-alpha-1</jcaptcha.version>
+        <jcaptcha.version>2.0.0</jcaptcha.version>
         <maven.version>3.0</maven.version>
            <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
@@ -569,22 +569,31 @@
         
         <!-- https://mvnrepository.com/artifact/com.octo.captcha/jcaptcha-api -->
         <dependency>
-            <groupId>com.octo.captcha</groupId>
+            <groupId>io.leopard.thirdparty</groupId>
             <artifactId>jcaptcha-api</artifactId>
             <version>${jcaptcha.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.octo.captcha/jcaptcha -->
         <dependency>
-            <groupId>com.octo.captcha</groupId>
-            <artifactId>jcaptcha</artifactId>
+            <groupId>io.leopard.thirdparty</groupId>
+            <artifactId>jcaptcha-core</artifactId>
             <version>${jcaptcha.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.octo.captcha/jcaptcha-integration-simple-servlet -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <!-- Maven Central integration for the image CAPTCHA filter -->
         <dependency>
             <groupId>com.octo.captcha</groupId>
-            <artifactId>jcaptcha-integration-simple-servlet</artifactId>
-            <version>${jcaptcha.version}</version>
+            <artifactId>jcaptcha-integration-filter</artifactId>
+            <version>1.0</version>
             <exclusions>
+                <exclusion>
+                    <groupId>com.octo.captcha</groupId>
+                    <artifactId>jcaptcha</artifactId>
+                </exclusion>
                 <exclusion>
                     <artifactId>servlet-api</artifactId>
                     <groupId>javax.servlet</groupId>
@@ -597,6 +606,10 @@
             <artifactId>jcaptcha-extension-sound-freetts</artifactId>
             <version>${jcaptcha-extension-sound-freetts.version}</version>
             <exclusions>
+                <exclusion>
+                    <groupId>com.octo.captcha</groupId>
+                    <artifactId>jcaptcha</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>com.sun.speech.freetts</groupId>
                     <artifactId>freetts</artifactId>
@@ -614,6 +627,12 @@
             <groupId>com.octo.captcha</groupId>
             <artifactId>jcaptcha-extension-buffered-engine</artifactId>
             <version>${jcaptcha-extension-buffered-engine.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.octo.captcha</groupId>
+                    <artifactId>jcaptcha</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
                 
         <!-- For Spring Web -->

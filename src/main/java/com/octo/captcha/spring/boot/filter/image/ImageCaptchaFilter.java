@@ -15,9 +15,9 @@
  */
 package com.octo.captcha.spring.boot.filter.image;
 
-import com.octo.captcha.spring.boot.filter.FilterConfigUtils;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
+import com.octo.captcha.module.filter.FilterConfigUtils;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
 
 /**
  * TODO
@@ -33,13 +33,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import javax.imageio.ImageIO;
 
