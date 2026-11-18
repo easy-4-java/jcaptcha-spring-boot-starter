@@ -15,8 +15,10 @@
  */
 package com.octo.captcha.spring.boot.filter;
 
+import com.octo.captcha.module.filter.FilterConfigUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockFilterConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,9 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class FilterConfigUtilsTest {
 
     @Test
-    @DisplayName("Instance can be created via constructor")
-    void testInstantiation() {
-        FilterConfigUtils instance = new FilterConfigUtils();
-        assertThat(instance).isNotNull();
+    @DisplayName("JCaptcha integration reads servlet filter parameters")
+    void testReadsFilterParameter() throws Exception {
+        MockFilterConfig config = new MockFilterConfig();
+        config.addInitParameter("CaptchaRenderingURL", "/captcha.jpg");
+        assertThat(FilterConfigUtils.getStringInitParameter(config, "CaptchaRenderingURL", true))
+                .isEqualTo("/captcha.jpg");
     }
 }
