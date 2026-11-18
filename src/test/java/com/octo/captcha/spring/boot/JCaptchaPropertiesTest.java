@@ -19,6 +19,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit tests for {{ @link JCaptchaProperties }}.
@@ -30,6 +31,18 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @DisplayName("JCaptchaProperties Tests")
 class JCaptchaPropertiesTest {
+    @Test
+    @DisplayName("CAPTCHA type parser accepts configured modes and rejects unknown values")
+    void testCaptchaTypeParsing() {
+        assertThat(JCaptchaProperties.JCaptchaType.valueOfIgnoreCase("FILTER"))
+                .isEqualTo(JCaptchaProperties.JCaptchaType.FILTER);
+        assertThat(JCaptchaProperties.JCaptchaType.SERVLET.equals("servlet")).isTrue();
+        assertThat(JCaptchaProperties.JCaptchaType.FILTER.equals(JCaptchaProperties.JCaptchaType.SERVLET))
+                .isFalse();
+        assertThatThrownBy(() -> JCaptchaProperties.JCaptchaType.valueOfIgnoreCase("unknown"))
+                .isInstanceOf(java.util.NoSuchElementException.class);
+    }
+
     @Test
     @DisplayName("Default constructor creates non-null instance")
     void testDefaultInstance() {
