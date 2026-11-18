@@ -11,7 +11,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
+import com.octo.captcha.spring.boot.servlet.ImageCaptchaServlet;
 import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import com.octo.captcha.spring.boot.ext.filter.ExtendImageCaptchaFilter;
@@ -33,13 +33,11 @@ public class JCaptchaAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean(name = "jcaptchaServlet")
 	@ConditionalOnProperty(prefix = JCaptchaProperties.PREFIX, value = "type", havingValue = "servlet")
-	public ServletRegistrationBean<SimpleImageCaptchaServlet> servletRegistrationBean(JCaptchaProperties properties, ImageCaptchaService imageCaptchaService) throws ServletException {
+	public ServletRegistrationBean<ImageCaptchaServlet> servletRegistrationBean(JCaptchaProperties properties, ImageCaptchaService imageCaptchaService) throws ServletException {
 
-		ServletRegistrationBean<SimpleImageCaptchaServlet> registrationBean = new ServletRegistrationBean<SimpleImageCaptchaServlet>();
+		ServletRegistrationBean<ImageCaptchaServlet> registrationBean = new ServletRegistrationBean<ImageCaptchaServlet>();
 		
-		SimpleImageCaptchaServlet captchaServlet = new SimpleImageCaptchaServlet();
-
-		SimpleImageCaptchaServlet.service = imageCaptchaService;
+		ImageCaptchaServlet captchaServlet = new ImageCaptchaServlet(imageCaptchaService);
 		
 		registrationBean.setServlet(captchaServlet);
 		registrationBean.addUrlMappings(properties.getCaptchaServletPattern());
@@ -58,7 +56,7 @@ public class JCaptchaAutoConfiguration {
 
 		// 默认参数
 		registrationBean.addInitParameter(ExtendImageCaptchaFilter.CAPTCHA_ERROR_URL_PARAMETER, properties.getCaptchaErrorURL());
-		registrationBean.addInitParameter(ExtendImageCaptchaFilter.CAPTCHA_RENDERING_URL_PARAMETER, properties.getCaptchaErrorURL());
+		registrationBean.addInitParameter(ExtendImageCaptchaFilter.CAPTCHA_RENDERING_URL_PARAMETER, properties.getCaptchaRenderingURL());
 		registrationBean.addInitParameter(ExtendImageCaptchaFilter.CAPTCHA_VERIFICATION_URLS_PARAMETER, properties.getCaptchaVerificationURLs());
 		registrationBean.addInitParameter(ExtendImageCaptchaFilter.CAPTCHA_FAIL_URLS_PARAMETER, properties.getCaptchaForwardErrorURLs());
 		registrationBean.addInitParameter(ExtendImageCaptchaFilter.CAPTCHA_QUESTION_NAME_PARAMETER, properties.getCaptchaQuestionParameterName());

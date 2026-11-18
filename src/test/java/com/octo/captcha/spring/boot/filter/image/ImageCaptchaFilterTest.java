@@ -15,24 +15,25 @@
  */
 package com.octo.captcha.spring.boot.filter.image;
 
+import com.octo.captcha.spring.boot.ext.filter.ExtendImageCaptchaFilter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Unit tests for {{ @link ImageCaptchaFilter }}.
+ * Unit tests for {{ @link ExtendImageCaptchaFilter }}.
  *
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
-@DisplayName("ImageCaptchaFilter Tests")
+@DisplayName("ExtendImageCaptchaFilter Tests")
 class ImageCaptchaFilterTest {
 
     @Test
     @DisplayName("Instance can be created via constructor")
     void testInstantiation() {
-        ImageCaptchaFilter instance = new ImageCaptchaFilter();
+        ExtendImageCaptchaFilter instance = new ExtendImageCaptchaFilter();
         assertThat(instance).isNotNull();
     }
 }
